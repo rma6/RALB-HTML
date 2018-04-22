@@ -24,10 +24,24 @@
 		{
 			die("Ocorreu um erro na conexão com o servidor. Por favor tente mais tarde. Se o problema persistir contate o criador do sistema");
 		}
+
+		$sql = "USE RALB";
+		if ($conn->query($sql) !== TRUE)
+		{
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+
 		$sql = "INSERT INTO Users VALUES('".$cpf."', '".$senha."')";
-		if ($conn->query($sql) === TRUE) {
+		if ($conn->query($sql) === TRUE)
+		{
 			echo "Cadastro concluído com sucesso!";
-		} else {
+		}
+		elseif(mysql_errno() == 1062)
+		{
+			echo "Esse CPF já foi cadastrado.";
+		}
+		else
+		{
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 		
@@ -43,10 +57,27 @@
 		{
 			die("Ocorreu um erro na conexão com o servidor. Por favor tente mais tarde. Se o problema persistir contate o criador do sistema");
 		}
+
+		$sql = "USE RALB";
+		if ($conn->query($sql) !== TRUE)
+		{
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+
 		$sql = "DELETE FROM Users WHERE CPF='".$cpf."'";
-		if ($conn->query($sql) === TRUE) {
-			echo 'Descadastro concluído com sucesso!';
-		} else {
+		if ($conn->query($sql) === TRUE)
+		{
+			if(mysqli_affected_rows($conn) <= 0)
+			{
+				echo 'Os dados inseridos não estão cadastrados. Por favor, tente novamente.';
+			}
+			else
+			{
+				echo 'Descadastro concluído com sucesso!';
+			}			
+		}
+		else
+		{
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 		
