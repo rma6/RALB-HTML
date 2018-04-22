@@ -36,7 +36,7 @@
 		{
 			echo "Cadastro concluído com sucesso!";
 		}
-		elseif(mysql_errno() == 1062)
+		elseif(mysql_errno($conn) == 1062)
 		{
 			echo "Esse CPF já foi cadastrado.";
 		}
