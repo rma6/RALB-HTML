@@ -10,9 +10,21 @@
     <?php
 	$cpf = $_GET["cpf"];
 	$senha = $_GET["senha"];
-	$page = file_get_contents('http://www.biblioteca.ufpe.br/pergamum/biblioteca_s/php/login_usu.php?login='.$cpf.'&password='.$senha);
-	if (strpos($page, 'div') !== false) echo 'Dados inválidos, tente novamente.';
-	else echo 'Cadastro concluído com sucesso!';
+	$option = $_GET["option"];
+	if($option == 'cad')
+	{
+		$page = file_get_contents('http://www.biblioteca.ufpe.br/pergamum/biblioteca_s/php/login_usu.php?login='.$cpf.'&password='.$senha);	
+		if (strpos($page, 'div') !== false) echo 'Dados inválidos, tente novamente.';
+		else echo 'Cadastro concluído com sucesso!';
+	}
+	elseif($option == 'dcad')
+	{
+		echo 'Descadastro concluído com sucesso!';
+	}
+	else
+	{
+		echo 'Não fique mechendo no que não deve.';
+	}
 	?>
 	<br>
 	<form action="../index.html">
