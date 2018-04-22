@@ -18,7 +18,7 @@
 
 		$servername = "localhost";
 		$username = "web";
-		$password = "GRrPPHpM";
+		$password = "";
 		$conn = new mysqli($servername, $username, $password);
 		if ($conn->connect_error)
 		{
@@ -51,7 +51,7 @@
 	{
 		$servername = "localhost";
 		$username = "web";
-		$password = "GRrPPHpM";
+		$password = "";
 		$conn = new mysqli($servername, $username, $password);
 		if ($conn->connect_error)
 		{
