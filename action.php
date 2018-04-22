@@ -1,1 +1,0 @@
-document.getElementById('alert_login').innerHTML.includes('M')
