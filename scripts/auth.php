@@ -14,16 +14,47 @@
 	if($option == 'cad')
 	{
 		$page = file_get_contents('http://www.biblioteca.ufpe.br/pergamum/biblioteca_s/php/login_usu.php?login='.$cpf.'&password='.$senha);	
-		if (strpos($page, 'div') !== false) echo 'Dados inválidos, tente novamente.';
-		else echo 'Cadastro concluído com sucesso!';
+		if (strpos($page, 'div') !== false) echo 'Dados inválidos, tente novamente.';		
+
+		$servername = "localhost";
+		$username = "web";
+		$password = "GRrPPHpM";
+		$conn = new mysqli($servername, $username, $password);
+		if ($conn->connect_error)
+		{
+			die("Ocorreu um erro na conexão com o servidor. Por favor tente mais tarde. Se o problema persistir contate o criador do sistema");
+		}
+		$sql = "INSERT INTO Users VALUES('".$cpf."', '".$senha."')";
+		if ($conn->query($sql) === TRUE) {
+			echo "Cadastro concluído com sucesso!";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+		
+		$conn->close();
 	}
 	elseif($option == 'dcad')
 	{
-		echo 'Descadastro concluído com sucesso!';
+		$servername = "localhost";
+		$username = "web";
+		$password = "GRrPPHpM";
+		$conn = new mysqli($servername, $username, $password);
+		if ($conn->connect_error)
+		{
+			die("Ocorreu um erro na conexão com o servidor. Por favor tente mais tarde. Se o problema persistir contate o criador do sistema");
+		}
+		$sql = "DELETE FROM Users WHERE CPF='".$cpf."'";
+		if ($conn->query($sql) === TRUE) {
+			echo 'Descadastro concluído com sucesso!';
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+		
+		$conn->close();		
 	}
 	else
 	{
-		echo 'Não fique mechendo no que não deve.';
+		echo "Opção ".$option." desconhecida. Retorne a página anterior e tente de novo.";
 	}
 	?>
 	<br>
