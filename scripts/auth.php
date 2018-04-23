@@ -14,7 +14,7 @@
 	if($option == 'cad')
 	{
 		$page = file_get_contents('http://www.biblioteca.ufpe.br/pergamum/biblioteca_s/php/login_usu.php?login='.$cpf.'&password='.$senha);	
-		if (strpos($page, 'div') !== false) echo 'Dados nõ cadastrados no Pergamum. Verifique se você digitou corretamente e tente novamente.';
+		if (strpos($page, 'div') !== false) echo 'Dados não cadastrados no Pergamum. Verifique se você digitou corretamente e tente novamente.';
 		else
 		{
 			$servername = "localhost";
